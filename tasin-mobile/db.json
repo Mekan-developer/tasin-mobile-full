@@ -1,0 +1,138 @@
+{
+  "categories": [
+    { "id": 1, "name": "Смарт-фоны", "order": 1,"show_price": true,"image_icon": "smartphones.png" },
+    { "id": 2, "name": "Планшеты",   "order": 2,"show_price": true,"image_icon": "tablets.png"  },
+    { "id": 3, "name": "Часы",       "order": 2, "show_price": true,"image_icon": "watches.png" },
+    { "id": 4, "name": "Наушники",   "order": 2, "show_price": true,"image_icon": "headphones.png" },
+    { "id": 5, "name": "Кабели",     "order": 2, "show_price": true,"image_icon": "cables.png" },
+    { "id": 6, "name": "Батареи",    "order": 2, "show_price": true,"image_icon": "batteries.png" },
+    { "id": 7, "name": "Чехлы",      "order": 2, "show_price": true,"image_icon": "cases.png" }
+  ],
+
+  "slides" : [
+    {
+      "badge": "НОВИНКА 2024",
+      "title": "Samsung Galaxy S24",
+      "description": "AI-функции для повседневной жизни.",
+      "bgColor": "#22c55e",
+      "image": "iphone_case_deep_purple.jpeg",
+      "price": 89990,
+      "currency": "TMT",
+      "oldPrice": 99990,
+      "discount": "−10%"
+    },
+    {
+      "badge": "АКЦИЯ",
+      "title": "iPhone 15 Pro",
+      "description": "Титановый корпус и мощный чип.",
+      "bgColor": "#3b82f6",
+      "image": "iphone_case_silvesdr.jpeg",
+      "price": 3.5,
+      "currency": "USD",
+      "oldPrice": 109990,
+      "discount": "−14%"
+    },
+    {
+      "badge": "ХИТ ПРОДАЖ",
+      "title": "Xiaomi 14",
+      "description": "Флагманская камера Leica.",
+      "bgColor": "#f97316",
+      "image": "iphone_case_mockup.jpeg",
+      "price": 59990,
+      "currency": "TMT",
+      "discount": "−15%"
+    }
+  ], 
+
+  "products": [
+  {
+    "id": 101,
+    "category_id": 7,
+    "activeImage": 0,
+    "name": "17 Pro Style Premium Case",
+    "description": "",
+    "price": 3.5,
+    "currency": "USD",
+    "images": ["iphone_case_mockup.jpeg", "iphone_case_silver.jpeg", "iphone_case_deep_purple.jpeg"],
+    "views": 1254,
+    "isNew": true,
+    "variants": [
+      { "model": "iPhone 16 Pro Max", "price": "5656TMT" },
+      { "model": "iPhone 16 Pro", "price": "" },
+      { "model": "iPhone 15 Pro Max" },
+      { "model": "iPhone 15 Pro" },
+      { "model": "iPhone 14 Pro Max" },
+      { "model": "iPhone 14 Pro" },
+      { "model": "iPhone 13 Pro Max" },
+      { "model": "iPhone 13 Pro" }
+    ]
+  },
+  {
+    "id": 102,
+    "category_id": 7,
+    "name": "Crystal Clear MagSafe",
+    "description": "Идеально прозрачный чехол с усиленными магнитами.",
+    "price": 3.5,
+    "currency": "USD",
+    "images": ["iphone_case_mockup.jpeg", "iphone_case_silver.jpeg", "iphone_case_deep_purple.jpeg"],
+    "views": 432,
+    "isNew": true,
+    "variants": []
+  },
+  {
+    "id": 201,
+    "category_id": 7,
+    "name": "iPhone 15 Pro",
+    "price": 3.5,
+    "currency": "USD",
+    "images": ["iphone_15_pro.jpeg", "iphone_15_pro_2.jpeg"],
+    "views": 890,
+    "isNew": true,
+    "variants": []
+  },
+  {
+    "id": 101,
+    "category_id": 7,
+    "activeImage": 0,
+    "name": "17 Pro Style Premium Case",
+    "description": "",
+    "price": 3.5,
+    "currency": "USD",
+    "images": ["iphone_case_mockup.jpeg", "iphone_case_silver.jpeg", "iphone_case_deep_purple.jpeg"],
+    "views": 1254,
+    "isNew": true,
+    "variants": [
+      { "model": "iPhone 16 Pro Max", "price": "5656TMT" },
+      { "model": "iPhone 16 Pro", "price": "" },
+      { "model": "iPhone 15 Pro Max" },
+      { "model": "iPhone 15 Pro" },
+      { "model": "iPhone 14 Pro Max" },
+      { "model": "iPhone 14 Pro" },
+      { "model": "iPhone 13 Pro Max" },
+      { "model": "iPhone 13 Pro" }
+    ]
+  },
+  {
+    "id": 101,
+    "category_id": 7,
+    "activeImage": 0,
+    "name": "17 Pro Style Premium Case",
+    "description": "",
+    "price": 3.5,
+    "currency": "USD",
+    "images": ["iphone_case_mockup.jpeg", "iphone_case_silver.jpeg", "iphone_case_deep_purple.jpeg"],
+    "views": 1254,
+    "isNew": true,
+    "variants": [
+      { "model": "iPhone 16 Pro Max", "price": "5656TMT" },
+      { "model": "iPhone 16 Pro", "price": "" },
+      { "model": "iPhone 15 Pro Max" },
+      { "model": "iPhone 15 Pro" },
+      { "model": "iPhone 14 Pro Max" },
+      { "model": "iPhone 14 Pro" },
+      { "model": "iPhone 13 Pro Max" },
+      { "model": "iPhone 13 Pro" }
+    ]
+  }
+]
+}

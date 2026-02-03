@@ -1,0 +1,30 @@
+# Laravel
+server-side/vendor
+server-side/node_modules
+server-side/.env
+server-side/.idea
+server-side/.vscode
+server-side/public/storage
+server-side/storage/*.key
+server-side/storage/framework/cache/data
+server-side/storage/logs
+server-side/bootstrap/cache/*.php
+Homestead.yaml
+Homestead.json
+
+# Vue / Node
+client-side/node_modules
+client-side/dist
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+
+# Docker
+docker-compose.override.yml
+*.env.local
+*.env.*.local
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+*.swp

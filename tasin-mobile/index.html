@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <link rel="shortcut icon" href="/icons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#121212" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+      <!-- САМОЕ ВАЖНОЕ - ДОБАВЬТЕ ЭТО -->
+      <link rel="manifest" href="/manifest.json">
+    
+    <!-- PWA мета-теги -->
+    <meta name="theme-color" content="#121212"> <!-- Исправьте цвет на ваш -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta name="apple-mobile-web-app-title" content="Tasin mobile">
+    
+    <!-- Для iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>Täsin Mobile</title>
+    <!-- Стили экрана-заставки PWA: лого и название на белом фоне -->
+    <style>
+      #pwa-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+      #pwa-splash img {
+        max-width: 160px;
+        max-height: 160px;
+        width: auto;
+        height: auto;
+      }
+      #pwa-splash .pwa-splash-title {
+        font-family: 'Poppins', system-ui, sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #111;
+        display: inline-flex;
+        gap: 0.02em;
+      }
+      /* Волновая анимация букв: каждая буква с задержкой по очереди */
+      #pwa-splash .pwa-splash-char {
+        display: inline-block;
+        animation: pwa-wave 1.2s ease-in-out infinite both;
+        animation-delay: calc(0.08s * var(--i));
+      }
+      @keyframes pwa-wave {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-0.35em); }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-900">
+    <!-- Экран-заставка при запуске PWA: лого + название, скрывается через 3 с -->
+    <div id="pwa-splash">
+      <img src="/icons/web-app-manifest-512x512.png" alt="" width="192" height="192" />
+      <span class="pwa-splash-title" aria-label="Tasin - mobile">
+      <span class="pwa-splash-char" style="--i: 0">T</span><span class="pwa-splash-char" style="--i: 1">a</span><span class="pwa-splash-char" style="--i: 2">s</span><span class="pwa-splash-char" style="--i: 3">i</span><span class="pwa-splash-char" style="--i: 4">n</span><span class="pwa-splash-char" style="--i: 5"> - </span><span class="pwa-splash-char" style="--i: 6">m</span><span class="pwa-splash-char" style="--i: 7">o</span><span class="pwa-splash-char" style="--i: 8">b</span><span class="pwa-splash-char" style="--i: 9">i</span><span class="pwa-splash-char" style="--i: 10">l</span><span class="pwa-splash-char" style="--i: 11">e</span>
+    </span>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+{
+  "name": "Täsin Mobile",
+  "short_name": "TM",
+  "description": "Premium Mobile Electronics Shop",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+
+  "theme_color": "#0B0F1A",
+  "background_color": "#0B0F1A",
+
+  "orientation": "portrait",
+  "lang": "tk",
+  "dir": "ltr",
+
+  "categories": ["shopping", "business", "electronics"],
+
+  "icons": [
+    {
+      "src": "/icons/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "onumler",
+      "short_name": "New",
+      "url": "/product/7",
+      "icons": [
+        { "src": "/icons/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }
+      ]
+    },
+    {
+      "name": "gozleg",
+      "short_name": "gozle",
+      "url": "/search",
+      "icons": [
+        { "src": "/icons/favicon-96x96.png", "sizes": "96x96", "type": "image/png" }
+      ]
+    }
+  ],
+
+  "prefer_related_applications": false
+}
