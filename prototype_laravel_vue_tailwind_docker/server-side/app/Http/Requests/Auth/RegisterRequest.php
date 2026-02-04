@@ -37,7 +37,6 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'nullable|string|min:6',
-            'role_id' => 'required|exists:roles,id'
         ];
         if ($this->isMethod('post')) {
             $rules['password'] = 'required|string|min:6';

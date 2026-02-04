@@ -9,11 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-use Spatie\Permission\Traits\HasRoles;
-
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable, HasApiTokens, HasRoles;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +22,12 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
-        'restaurant_id',
+        'google_id',
+        'avatar',
+        'provider_name',
+        'provider_id',
+        'phone',
+        'phone_country_code',
     ];
 
     /**
@@ -46,35 +49,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return [
             'email_verified_at' => 'datetime',
+            'phone_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
-
-    /**
-     * Get the restaurant that the user belongs to.
-     */
-    public function restaurant()
-    {
-        return $this->belongsTo(Restaurant::class);
-    }
-
-    /**
-     * Scope a query to only include users of a specific restaurant.
-     */
-    public function scopeForRestaurant($query, $restaurantId)
-    {
-        return $query->where('restaurant_id', $restaurantId);
-    }
-
-    /**
-     * Check if user is owner of a restaurant.
-     */
-    public function isOwnerOf($restaurantId): bool
-    {
-        return $this->hasRole('owner') &&
-               (int)$this->restaurant_id === (int)$restaurantId;
-    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

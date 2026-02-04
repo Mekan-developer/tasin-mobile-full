@@ -14,13 +14,14 @@ class IndexResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
-        $data = [
+        return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'role' => $this->getRoleNames()->first(),
+            'phone' => $this->phone,
+            'avatar' => $this->avatar,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
-        return $data;
     }
 }

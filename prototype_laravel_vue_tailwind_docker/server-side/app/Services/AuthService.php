@@ -26,7 +26,6 @@ class AuthService
             'name' => $dto->name,
             'email' => $dto->email,
             'password' => $dto->password,
-            'role_id' => $dto->role_id,
         ]);
 
         // Создаем access token
@@ -65,16 +64,7 @@ class AuthService
         }
 
         // Блокируем вход владельца/сотрудников, если ресторан отключён
-        if (
-            !$user->hasRole('super-admin') &&
-            $user->restaurant &&
-            !$user->restaurant->active
-        ) {
-            return [
-                'error' => 'Ресторан отключён. Обратитесь к администратору.',
-                'status' => 403,
-            ];
-        }
+
 
         // Создаем refresh token с увеличенным TTL (30 дней)
         JWTAuth::factory()->setTTL(43200); // 30 дней в минутах

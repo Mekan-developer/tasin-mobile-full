@@ -16,10 +16,25 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable(); // nullable для Google users
             $table->rememberToken();
             $table->timestamps();
+
+
+            // Google Sign In fields
+            $table->string('google_id')->nullable()->unique();
+            $table->string('avatar')->nullable();
+            $table->string('provider_name')->nullable();
+            $table->string('provider_id')->nullable()->unique();
+
+            // Phone number field
+            $table->string('phone')->nullable()->unique();
+
+            // Дополнительные опции для телефона:
+            $table->string('phone_country_code')->nullable(); // код страны, если нужно
+            $table->timestamp('phone_verified_at')->nullable(); // верификация телефона
         });
+
 
         // Schema::create('password_reset_tokens', function (Blueprint $table) {
         //     $table->string('email')->primary();
@@ -43,8 +58,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
-        Schema::dropIfExists('sessions');
+        // Schema::dropIfExists('password_reset_tokens');
+        // Schema::dropIfExists('sessions');
 
     }
 };
