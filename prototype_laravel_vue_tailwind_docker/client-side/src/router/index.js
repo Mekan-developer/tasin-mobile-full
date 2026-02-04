@@ -29,30 +29,10 @@ const routes = [
         meta: { title: "home page", requiresAuth: true },
       },
       {
-        path: '/restaurants',
-        name: 'RestaurantsLayout',
-        component: () => import('../layouts/RestaurantsLayout.vue'),
-        meta: { title: "restaurants page", requiresAuth: true, roles: ['super-admin', 'owner'] },
-        children: [
-          {
-            path: '',
-            name: 'restaurants',
-            component: () => import('../pages/restaurants/IndexPage.vue'),
-            meta: { title: "restaurants page", requiresAuth: true, roles: ['super-admin'] },
-          },
-          {
-            path: 'my',
-            name: 'my-restaurant',
-            component: () => import('../pages/restaurants/MyRestaurantPage.vue'),
-            meta: { title: "my restaurant", requiresAuth: true, roles: ['owner'] },
-          }
-        ]
-      },
-      {
-        path: '/Icons',
-        name: 'Icons',
-        component: () => import('../pages/IconPage.vue'),
-        meta: { title: "Icons page", requiresAuth: true },
+        path: '/categories',
+        name: 'Categories',
+        component: () => import('../pages/CategoryPage.vue'),
+        meta: { title: "Categories page", requiresAuth: true },
       },
       {
         path: '/settings',
@@ -89,26 +69,14 @@ const routes = [
         path: '/users',
         name: 'UsersLayout',
         component: () => import('../layouts/UsersLayout.vue'),
-        meta: { title: "user page", requiresAuth: true, roles: ['owner'] },
+        meta: { title: "user page", requiresAuth: true },
         children: [
           {
             path: '',
             name: 'users',
             component: () => import('../pages/users/IndexPage.vue'),
-            meta: { title: "user page", requiresAuth: true, roles: ['owner'] },
+            meta: { title: "user page", requiresAuth: true  },
           },
-          {
-            path: 'roles',
-            name: 'roles',
-            component: () => import('../pages/users/RolesPage.vue'),
-            meta: { title: "roles page", requiresAuth: true, roles: ['owner'] },
-          },
-          {
-            path: 'permissions',
-            name: 'permissions',
-            component: () => import('../pages/users/PermissionsPage.vue'),
-            meta: { title: "permissions page", requiresAuth: true, roles: ['owner'] },
-          }
         ]
       },
     ],
@@ -154,14 +122,14 @@ router.beforeEach(async (to, from, next) => {
     if (to.meta.requiresAuth && !isAuth) return next('/login')
     if (to.path === '/login' && isAuth) return next('/')
 
-    // Проверка роли, если маршрут требует конкретные роли
-    if (to.meta.roles && Array.isArray(to.meta.roles) && to.meta.roles.length > 0) {
-      const storedUser = store.state.user.currentUser || JSON.parse(localStorage.getItem('user') || 'null')
-      const userRole = storedUser?.role
-      if (!userRole || !to.meta.roles.includes(userRole)) {
-        return next('/home')
-      }
-    }
+    // // Проверка роли, если маршрут требует конкретные роли
+    // if (to.meta.roles && Array.isArray(to.meta.roles) && to.meta.roles.length > 0) {
+    //   const storedUser = store.state.user.currentUser || JSON.parse(localStorage.getItem('user') || 'null')
+    //   const userRole = storedUser?.role
+    //   if (!userRole || !to.meta.roles.includes(userRole)) {
+    //     return next('/home')
+    //   }
+    // }
 
     next()
   } catch (error) {

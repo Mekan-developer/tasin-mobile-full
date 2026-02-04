@@ -9,17 +9,6 @@
             <span class="font-semibold text-sm">Users</span>
             <!-- Индикатор активного таба -->
         </RouterLink>
-        <!-- Неактивные табы -->
-        <RouterLink to="/users/roles" class="flex-1 flex justify-center items-center rounded-t-md py-4 px-6 cursor-pointer transition-colors duration-200"
-        :class="$route.path === '/users/roles' ? 'bg-deepblue text-white shadow-lg' : 'bg-gray-100 hover:bg-fog text-midnight'">
-            <AppIcon name="Shield" size="16" class="mr-2" />
-            <span class="font-medium text-sm">Roles</span>
-        </RouterLink>
-        <RouterLink to="/users/permissions" class="flex-1 flex justify-center items-center rounded-t-md py-4 px-6 cursor-pointer transition-colors duration-200"
-        :class="$route.path === '/users/permissions' ? 'bg-deepblue text-white shadow-lg' : 'bg-gray-100 hover:bg-fog text-midnight'">
-            <AppIcon name="Key" size="16" class="mr-2" />
-            <span class="font-medium text-sm">Permissions</span>
-        </RouterLink>
       </div>
 
       <router-view/>
