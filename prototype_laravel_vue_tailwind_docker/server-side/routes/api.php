@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\SlideController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +36,8 @@ Route::middleware(['auth:api'])->group(function () {
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Categories, Slides, Products (публичное API)
+Route::apiResource('categories', CategoryController::class);
+Route::apiResource('slides', SlideController::class);
+Route::apiResource('products', ProductController::class);

@@ -35,6 +35,30 @@
               :label="isSuperAdmin ? $t('restaurants') : $t('my_restaurant')"
             />
 
+            <!-- Categories Link -->
+            <SidebarLink
+              @click="setDropdown(false)"
+              to="/categories"
+              icon="Folder"
+              label="Категории"
+            />
+
+            <!-- Slides Link -->
+            <SidebarLink
+              @click="setDropdown(false)"
+              to="/slides"
+              icon="Image"
+              label="Слайды"
+            />
+
+            <!-- Products Link -->
+            <SidebarLink
+              @click="setDropdown(false)"
+              to="/products"
+              icon="Package"
+              label="Товары"
+            />
+
             <!-- Icons Link -->
             <SidebarLink
               @click="setDropdown(false)"

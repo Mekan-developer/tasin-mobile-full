@@ -199,6 +199,7 @@ export default {
 </script>
 
 <style>
+@reference "../assets/app.css";
 
 @layer components {
   .btn-primary {

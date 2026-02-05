@@ -31,8 +31,20 @@ const routes = [
       {
         path: '/categories',
         name: 'Categories',
-        component: () => import('../pages/CategoryPage.vue'),
+        component: () => import('../pages/categories/IndexPage.vue'),
         meta: { title: "Categories page", requiresAuth: true },
+      },
+      {
+        path: '/slides',
+        name: 'Slides',
+        component: () => import('../pages/slides/SlidesPage.vue'),
+        meta: { title: "Slides page", requiresAuth: true },
+      },
+      {
+        path: '/products',
+        name: 'Products',
+        component: () => import('../pages/products/ProductsPage.vue'),
+        meta: { title: "Products page", requiresAuth: true },
       },
       {
         path: '/settings',
