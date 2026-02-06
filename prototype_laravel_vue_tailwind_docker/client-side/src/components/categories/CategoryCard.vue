@@ -55,6 +55,7 @@
 
 <script>
 import AppIcon from '@/components/icons/AppIcon.vue'
+import { categoryImageUrl } from '@/utils/storageUrl'
 
 /** Карточка категории: иконка, название, порядок, show_price, кол-во продуктов, действия. */
 export default {
@@ -67,7 +68,7 @@ export default {
   emits: ['toggle-price', 'edit', 'delete'],
   methods: {
     imageUrl(filename) {
-      return `/storage/categories/${filename}`
+      return categoryImageUrl(filename)
     }
   }
 }

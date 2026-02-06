@@ -5,13 +5,21 @@
         <h1 class="text-2xl font-bold text-gray-900">Управление категориями</h1>
         <p class="text-gray-600 mt-1">Всего категорий: {{ categories.length }}</p>
       </div>
-      <button
-        @click="openCreateModal"
-        class="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
-      >
-        <AppIcon name="Plus" size="18" />
-        Добавить категорию
-      </button>
+      <div class="flex flex-wrap items-center gap-2">
+        <ExcelComponent
+          :categories="categories"
+          :products="products"
+          :load-categories="loadCategories"
+          @imported="loadCategories"
+        />
+        <button
+          @click="openCreateModal"
+          class="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+        >
+          <AppIcon name="Plus" size="18" />
+          Добавить категорию
+        </button>
+      </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -52,6 +60,7 @@
 import api from '@/api/http'
 import AppIcon from '@/components/icons/AppIcon.vue'
 import CategoryCard from '@/components/categories/CategoryCard.vue'
+import ExcelComponent from '@/components/categories/ExcelComponent.vue'
 import CategoryEmptyState from '@/components/categories/CategoryEmptyState.vue'
 import CategoryModal from '@/components/categories/CategoryModal.vue'
 import CategoryStats from '@/components/categories/CategoryStats.vue'
@@ -59,7 +68,7 @@ import CategoryStats from '@/components/categories/CategoryStats.vue'
 /** Страница управления категориями: список, создание, редактирование, статистика. */
 export default {
   name: 'CategoriesIndexPage',
-  components: { AppIcon, CategoryCard, CategoryEmptyState, CategoryModal, CategoryStats },
+  components: { AppIcon, CategoryCard, CategoryEmptyState, ExcelComponent, CategoryModal, CategoryStats },
   data() {
     return {
       categories: [],
@@ -96,8 +105,10 @@ export default {
         const res = await api.get('/categories')
         const list = res.data?.data ?? res.data ?? []
         this.categories = Array.isArray(list) ? list.sort((a, b) => (a.order || 0) - (b.order || 0)) : []
+        return this.categories
       } catch (e) {
         console.error('Error loading categories:', e)
+        return []
       }
     },
     async loadProducts() {
@@ -175,7 +186,7 @@ export default {
       } catch (e) {
         console.error('Error deleting category:', e)
       }
-    }
+    },
   }
 }
 </script>

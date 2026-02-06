@@ -119,6 +119,7 @@
 
 <script>
 import AppIcon from '@/components/icons/AppIcon.vue'
+import { categoryImageUrl } from '@/utils/storageUrl'
 
 /** Модальное окно создания/редактирования категории. */
 export default {
@@ -134,7 +135,7 @@ export default {
   emits: ['update:modelValue', 'update:form', 'save', 'image-upload'],
   methods: {
     imageUrl(filename) {
-      return filename ? `/storage/categories/${filename}` : ''
+      return categoryImageUrl(filename)
     },
     onFileChange(event) {
       const file = event.target.files[0]
