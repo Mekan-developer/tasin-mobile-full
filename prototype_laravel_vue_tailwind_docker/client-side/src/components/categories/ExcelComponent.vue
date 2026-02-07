@@ -10,18 +10,20 @@
     <button
       @click="$refs.excelFileInput?.click()"
       :disabled="importing"
-      class="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-deepblue border border-gray-300 dark:border-midnight text-gray-700 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-fogactive/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      <AppIcon name="Upload" size="18" />
+      <LoaderSpinner v-if="importing" size="sm" />
+      <AppIcon v-else name="Upload" size="18" />
       {{ importing ? 'Импорт...' : 'Загрузить Excel' }}
     </button>
     <button
       @click="downloadExcel"
-      :disabled="categories.length === 0"
-      class="flex items-center gap-2 px-4 py-2.5 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      :disabled="categories.length === 0 || downloading"
+      class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-deepblue border border-gray-300 dark:border-midnight text-gray-700 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-fogactive/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      <AppIcon name="Download" size="18" />
-      Скачать Excel
+      <LoaderSpinner v-if="downloading" size="sm" />
+      <AppIcon v-else name="Download" size="18" />
+      {{ downloading ? 'Скачивание...' : 'Скачать Excel' }}
     </button>
   </div>
 </template>
@@ -31,11 +33,12 @@ import * as XLSX from 'xlsx'
 import api from '@/api/http'
 import store from '@/store'
 import AppIcon from '@/components/icons/AppIcon.vue'
+import LoaderSpinner from '@/components/loaders/LoaderSpinner.vue'
 
 /** Компонент импорта/экспорта категорий в Excel. */
 export default {
   name: 'ExcelComponent',
-  components: { AppIcon },
+  components: { AppIcon, LoaderSpinner },
   props: {
     categories: { type: Array, default: () => [] },
     products: { type: Array, default: () => [] },
@@ -44,7 +47,7 @@ export default {
   },
   emits: ['imported'],
   data() {
-    return { importing: false }
+    return { importing: false, downloading: false }
   },
   methods: {
     getCategoryProductsCount(categoryId) {
@@ -157,21 +160,29 @@ export default {
         reader.readAsArrayBuffer(file)
       })
     },
-    /** Экспорт категорий в Excel. */
-    downloadExcel() {
-      const headers = ['ID', 'Название', 'Порядок', 'Показывать цену', 'Кол-во продуктов', 'Иконка']
-      const rows = this.categories.map((c) => [
-        c.id,
-        c.name,
-        c.order ?? '',
-        c.show_price ? 'Да' : 'Нет',
-        this.getCategoryProductsCount(c.id),
-        c.image_icon ?? ''
-      ])
-      const ws = XLSX.utils.aoa_to_sheet([headers, ...rows])
-      const wb = XLSX.utils.book_new()
-      XLSX.utils.book_append_sheet(wb, ws, 'Категории')
-      XLSX.writeFile(wb, `categories_${new Date().toISOString().slice(0, 10)}.xlsx`)
+    /** Экспорт категорий в Excel. Показывает loader во время генерации файла. */
+    async downloadExcel() {
+      if (this.downloading) return
+      this.downloading = true
+      await this.$nextTick()
+      await new Promise((r) => setTimeout(r, 50))
+      try {
+        const headers = ['ID', 'Название', 'Порядок', 'Показывать цену', 'Кол-во продуктов', 'Иконка']
+        const rows = this.categories.map((c) => [
+          c.id,
+          c.name,
+          c.order ?? '',
+          c.show_price ? 'Да' : 'Нет',
+          this.getCategoryProductsCount(c.id),
+          c.image_icon ?? ''
+        ])
+        const ws = XLSX.utils.aoa_to_sheet([headers, ...rows])
+        const wb = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(wb, ws, 'Категории')
+        XLSX.writeFile(wb, `categories_${new Date().toISOString().slice(0, 10)}.xlsx`)
+      } finally {
+        this.downloading = false
+      }
     }
   }
 }

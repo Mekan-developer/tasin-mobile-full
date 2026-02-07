@@ -1,6 +1,6 @@
 <template>
   <div class="relative h-full">
-    <nav class="flex flex-col justify-between h-full bg-gradient-to-b from-deepblue/95 to-midnight transition-all duration-300">
+    <nav class="flex flex-col justify-between h-full bg-transparent dark:bg-gradient-to-b dark:from-deepblue/95 dark:to-midnight transition-all duration-300">
       <!-- Top Section: Logo and Navigation -->
       <div class="flex-1 overflow-hidden">
 
@@ -9,8 +9,8 @@
           <!-- Navigation Header -->
           <div v-if="!isCollapsed" class="px-2 mb-3">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Главное меню</span>
-              <span class="text-xs text-fog/60">{{ menuItemsCount }} пунктов</span>
+              <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Главное меню</span>
+              <span class="text-xs text-gray-400 dark:text-fog/60">{{ menuItemsCount }} пунктов</span>
             </div>
           </div>
 
@@ -40,7 +40,7 @@
               @click="setDropdown(false)"
               to="/categories"
               icon="Folder"
-              label="Категории"
+              :label="$t('categories')"
             />
 
             <!-- Slides Link -->
@@ -48,7 +48,7 @@
               @click="setDropdown(false)"
               to="/slides"
               icon="Image"
-              label="Слайды"
+              :label="$t('slides')"
             />
 
             <!-- Products Link -->
@@ -56,7 +56,7 @@
               @click="setDropdown(false)"
               to="/products"
               icon="Package"
-              label="Товары"
+              :label="$t('products')"
             />
 
             <!-- Icons Link -->
@@ -119,12 +119,12 @@
 
             <!-- Divider -->
             <div v-if="!isCollapsed && hasAdminSection" class="px-2 py-3">
-              <div class="border-t border-fogactive/20"></div>
+              <div class="border-t border-gray-200 dark:border-fogactive/20"></div>
             </div>
 
             <!-- Admin Section (Optional) -->
             <div v-if="!isCollapsed && isSuperAdmin" class="px-2 mb-2">
-              <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Администрирование</span>
+              <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Администрирование</span>
             </div>
 
             <!-- Admin Links (Example) -->
@@ -141,19 +141,19 @@
       </div>
 
       <!-- Bottom Section -->
-      <div class="flex flex-col border-t border-fogactive/20 bg-midnight/80 backdrop-blur-sm">
+      <div class="flex flex-col border-t border-gray-200 dark:border-fogactive/20 bg-gray-50/95 dark:bg-midnight/80 backdrop-blur-sm">
         <!-- User Mini Profile (when expanded) -->
-        <div v-if="!isCollapsed" class="p-3 border-b border-fogactive/20">
+        <div v-if="!isCollapsed" class="p-3 border-b border-gray-200 dark:border-fogactive/20">
           <div class="flex items-center gap-3">
             <div class="relative">
               <div class="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
                 {{ userInitials }}
               </div>
-              <div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full ring-1 ring-midnight"></div>
+              <div class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 rounded-full ring-1 ring-white dark:ring-midnight"></div>
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white truncate">{{ currentUser?.name || 'Пользователь' }}</p>
-              <p class="text-xs text-fog truncate">{{ currentUserRoleText }}</p>
+              <p class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ currentUser?.name || 'Пользователь' }}</p>
+              <p class="text-xs text-gray-500 dark:text-fog truncate">{{ currentUserRoleText }}</p>
             </div>
           </div>
         </div>
@@ -163,13 +163,13 @@
           <div
             v-if="isCollapsed"
             @click="setCollapse(false)"
-            class="cursor-pointer group p-2 rounded-lg hover:bg-fogactive/30 transition-all duration-200 flex justify-center"
+            class="cursor-pointer group p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-fogactive/30 transition-all duration-200 flex justify-center"
             :title="$t('languages')"
           >
             <AppIcon
               name="Globe"
               size="20"
-              class="text-fog group-hover:text-white transition-colors"
+              class="text-gray-500 dark:text-fog group-hover:text-gray-900 dark:group-hover:text-white transition-colors"
             />
           </div>
 
@@ -179,19 +179,19 @@
           >
             <div class="flex items-center justify-between px-2">
               <div class="flex items-center gap-2">
-                <AppIcon name="Globe" size="14" class="text-fog" />
-                <span class="text-xs font-medium text-gray-300">
+                <AppIcon name="Globe" size="14" class="text-gray-500 dark:text-fog" />
+                <span class="text-xs font-medium text-gray-600 dark:text-gray-300">
                   {{ $t('language') }}
                 </span>
               </div>
-              <span class="text-xs text-fog/60">{{ currentLanguage.toUpperCase() }}</span>
+              <span class="text-xs text-gray-400 dark:text-fog/60">{{ currentLanguage.toUpperCase() }}</span>
             </div>
             <LanguageSwitcher />
           </div>
         </div>
 
         <!-- Logout Button -->
-        <div class="px-3 pb-3 pt-2 border-t border-fogactive/20">
+        <div class="px-3 pb-3 pt-2 border-t border-gray-200 dark:border-fogactive/20">
           <LogoutButton
             variant="sidebar"
             :show-icon="true"

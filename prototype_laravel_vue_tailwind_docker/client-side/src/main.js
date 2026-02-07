@@ -6,6 +6,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import store from './store'
 import AppIcon from "@/components/icons/AppIcon.vue"
+import DraggableTable from "@/components/tables/DraggableTable.vue"
 import { createI18n } from 'vue-i18n'
 
 // Импорт языковых файлов
@@ -26,9 +27,13 @@ const i18n = createI18n({
 const app = createApp(App)
 
 app.component("AppIcon", AppIcon)
+app.component("DraggableTable", DraggableTable)
 app.use(store)
 app.use(i18n)
 app.use(router)
+
+// Применяем сохранённую тему до монтирования
+store.dispatch('ui/initTheme')
 
 // старт/стоп при навигации`
 router.beforeEach(async (to, from, next) => {

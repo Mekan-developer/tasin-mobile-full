@@ -16,6 +16,8 @@ class CategoryResource extends JsonResource
             'order' => $this->order,
             'show_price' => $this->show_price,
             'image_icon' => $this->image_icon,
+            'views' => $this->views ?? 0,
+            'is_active' => $this->is_active ?? true,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

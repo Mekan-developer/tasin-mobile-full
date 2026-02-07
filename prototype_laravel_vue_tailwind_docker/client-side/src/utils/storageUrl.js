@@ -15,3 +15,9 @@ export function categoryImageUrl(filename) {
   if (!filename) return ''
   return `${storageBase}/storage/categories/${filename}`
 }
+
+/** URL изображения товара. */
+export function productImageUrl(filename) {
+  if (!filename) return ''
+  return `${storageBase}/storage/products/${filename}`
+}

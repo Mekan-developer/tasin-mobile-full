@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 /** Сервис CRUD для категорий. */
 class CategoryService
@@ -33,9 +34,12 @@ class CategoryService
         return $category->fresh();
     }
 
-    /** Удаление категории. */
+    /** Удаление категории и связанного изображения. */
     public function delete(Category $category): bool
     {
+        if ($category->image_icon) {
+            Storage::disk('public')->delete('categories/' . $category->image_icon);
+        }
         return $category->delete();
     }
 }

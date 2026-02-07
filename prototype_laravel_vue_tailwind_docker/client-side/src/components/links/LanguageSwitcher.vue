@@ -20,7 +20,7 @@
           size="14"
           :class="[
             'transition-colors duration-200',
-            isActive(lang) ? 'text-white' : 'text-fog group-hover:text-white'
+            isActive(lang) ? 'text-white' : 'text-gray-500 dark:text-fog group-hover:text-gray-900 dark:group-hover:text-white'
           ]"
         />
 
@@ -28,7 +28,7 @@
         <span
           :class="[
             'text-xs font-medium transition-colors duration-200',
-            isActive(lang) ? 'text-white' : 'text-gray-400 group-hover:text-white'
+            isActive(lang) ? 'text-white' : 'text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
           ]"
         >
           {{ lang.toUpperCase() }}
@@ -91,18 +91,34 @@ export default {
 }
 
 .inactive-language {
+  background: rgba(229, 231, 235, 0.6);
+  border-color: rgba(209, 213, 219, 0.5);
+}
+
+:global(.dark) .inactive-language {
   background: rgba(71, 89, 129, 0.1);
   border-color: rgba(207, 207, 209, 0.1);
 }
 
 .inactive-language:hover {
+  background: rgba(209, 213, 219, 0.8);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+:global(.dark) .inactive-language:hover {
   background: rgba(71, 89, 129, 0.3);
   border-color: rgba(71, 89, 129, 0.5);
-  transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .active-language {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.9));
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+:global(.dark) .active-language {
   background: linear-gradient(135deg, rgba(0, 31, 63, 0.9), rgba(24, 28, 54, 0.9));
   border-color: rgba(0, 31, 63, 0.5);
   box-shadow: 0 2px 6px rgba(0, 31, 63, 0.3);

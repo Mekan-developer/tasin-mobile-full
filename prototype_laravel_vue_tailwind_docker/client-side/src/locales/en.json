@@ -106,6 +106,8 @@
   },
 
    "my_restaurant": "My Restaurant",
-    "restaurants": "Restaurants"
-
+   "restaurants": "Restaurants",
+   "categories": "Categories",
+   "slides": "Slides",
+   "products": "Products"
 }

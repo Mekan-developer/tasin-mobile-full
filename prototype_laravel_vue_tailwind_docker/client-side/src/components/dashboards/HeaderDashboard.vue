@@ -8,15 +8,15 @@
       <!-- User Menu Button -->
       <button
         @click="toggleUserMenu"
-        class="flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-gray-100/80 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 group"
-        :class="{ 'bg-gray-100/80': userMenuOpen }"
+        class="flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200 hover:bg-gray-100/80 dark:hover:bg-fogactive/50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-deepblue group"
+        :class="{ 'bg-gray-100/80 dark:bg-fogactive/50': userMenuOpen }"
         aria-label="Меню пользователя"
         aria-haspopup="true"
         :aria-expanded="userMenuOpen"
       >
         <!-- User Avatar -->
         <div class="relative">
-          <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-md ring-2 ring-white ring-offset-1">
+          <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm shadow-md ring-2 ring-white dark:ring-deepblue ring-offset-1 dark:ring-offset-deepblue">
             {{ userInitials }}
           </div>
           <div class="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full ring-2 ring-white"></div>
@@ -25,7 +25,7 @@
         <!-- User Info (only visible on larger screens) -->
         <div class="hidden md:block text-left min-w-0">
           <div class="flex items-center gap-2">
-            <span class="text-sm font-semibold text-gray-900 truncate max-w-[120px]">
+            <span class="text-sm font-semibold text-gray-900 dark:text-white truncate max-w-[120px]">
               {{ currentUser?.name || 'John Doe' }}
             </span>
             <!-- Role Badge -->
@@ -36,7 +36,7 @@
               {{ currentUser?.role || 'user' }}
             </span>
           </div>
-          <p class="text-xs text-gray-500 truncate max-w-[140px]">
+          <p class="text-xs text-gray-500 dark:text-fog truncate max-w-[140px]">
             {{ currentUser?.email || 'user@example.com' }}
           </p>
         </div>
@@ -46,7 +46,7 @@
           name="ChevronDown"
           size="16"
           :class="[
-            'text-gray-400 transition-transform duration-300 flex-shrink-0',
+            'text-gray-400 dark:text-fog transition-transform duration-300 flex-shrink-0',
             { 'rotate-180': userMenuOpen }
           ]"
         />

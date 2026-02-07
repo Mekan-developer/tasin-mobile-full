@@ -45,39 +45,66 @@ export default {
 </script>
 
 <style scoped>
+/* Светлая тема по умолчанию */
 .sidebar-link {
   background: transparent;
-  color: #cfcfd1;
+  color: #6b7280;
   position: relative;
 }
 
 .sidebar-link:hover {
-  background: rgba(71, 89, 129, 0.3);
-  color: white;
+  background: rgba(209, 213, 219, 0.5);
+  color: #111827;
   transform: translateX(2px);
 }
 
 .sidebar-link:hover .sidebar-icon {
-  color: white;
+  color: #111827;
 }
 
 .sidebar-link:hover .sidebar-label {
-  color: white;
+  color: #111827;
 }
 
 .active-sidebar-link {
-  background: linear-gradient(90deg, rgba(71, 89, 129, 0.4), rgba(71, 89, 129, 0.2));
-  color: white;
-  border-right: 3px solid #001f3f;
+  background: linear-gradient(90deg, rgba(147, 197, 253, 0.3), rgba(147, 197, 253, 0.15));
+  color: #1e40af;
+  border-right: 3px solid #3b82f6;
 }
 
 .active-sidebar-link .sidebar-icon {
-  color: white;
+  color: #1e40af;
 }
 
 .active-sidebar-link .sidebar-label {
-  color: white;
+  color: #1e40af;
   font-weight: 600;
+}
+
+/* Тёмная тема */
+:global(.dark) .sidebar-link {
+  color: #cfcfd1;
+}
+
+:global(.dark) .sidebar-link:hover {
+  background: rgba(71, 89, 129, 0.3);
+  color: white;
+}
+
+:global(.dark) .sidebar-link:hover .sidebar-icon,
+:global(.dark) .sidebar-link:hover .sidebar-label {
+  color: white;
+}
+
+:global(.dark) .active-sidebar-link {
+  background: linear-gradient(90deg, rgba(71, 89, 129, 0.4), rgba(71, 89, 129, 0.2));
+  color: white;
+  border-right-color: #001f3f;
+}
+
+:global(.dark) .active-sidebar-link .sidebar-icon,
+:global(.dark) .active-sidebar-link .sidebar-label {
+  color: white;
 }
 
 /* Collapsed state */

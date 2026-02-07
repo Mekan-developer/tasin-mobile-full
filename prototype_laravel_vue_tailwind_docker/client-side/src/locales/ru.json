@@ -106,5 +106,8 @@
       "active_status": "Статус активности"
    },
    "my_restaurant": "Мой ресторан",
-   "restaurants": "Рестораны"
+   "restaurants": "Рестораны",
+   "categories": "Категории",
+   "slides": "Слайды",
+   "products": "Товары"
 }

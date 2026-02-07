@@ -2,6 +2,7 @@ import scrollbar from 'tailwind-scrollbar'
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

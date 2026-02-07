@@ -61,31 +61,35 @@
             </button>
           </div>
 
+          <div class="flex items-center justify-between pt-2">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-0.5">Активна</label>
+              <p class="text-xs text-gray-500">Показывать категорию в списке</p>
+            </div>
+            <button
+              type="button"
+              @click="$emit('update:form', { ...form, is_active: !(form.is_active !== false) })"
+              :class="(form.is_active !== false) ? 'bg-indigo-600' : 'bg-gray-300'"
+              class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
+            >
+              <span
+                :class="(form.is_active !== false) ? 'translate-x-6' : 'translate-x-1'"
+                class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
+              />
+            </button>
+          </div>
+
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Иконка категории</label>
-            <div class="flex items-center gap-3">
-              <div v-if="form.image_icon || imagePreview" class="w-14 h-14 bg-gray-50 rounded-md flex items-center justify-center border border-gray-200">
-                <img
-                  :src="imagePreview || imageUrl(form.image_icon)"
-                  :alt="form.name"
-                  class="w-10 h-10 object-contain"
-                />
-              </div>
-              <div class="flex-1">
-                <input type="file" ref="fileInput" @change="onFileChange" accept="image/*" class="hidden" />
-                <button
-                  type="button"
-                  @click="$refs.fileInput.click()"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-md hover:border-indigo-500 hover:bg-gray-50 transition-colors"
-                >
-                  <div class="flex items-center justify-center gap-2">
-                    <AppIcon name="Upload" size="16" class="text-gray-400" />
-                    <span class="text-sm text-gray-700">Загрузить изображение</span>
-                  </div>
-                </button>
-              </div>
+            <div class="flex items-center gap-4">
+              <CategoryImagePreview
+                :src="imagePreview || (typeof form.image_icon === 'string' ? form.image_icon : '')"
+                :alt="form.name"
+                :editable="true"
+                @upload="onImageUpload"
+              />
+              <p class="text-xs text-gray-500 flex-1">PNG, JPG до 2MB. Макс. 70×70px</p>
             </div>
-            <p class="text-xs text-gray-500 mt-1.5">PNG, JPG до 2MB</p>
           </div>
         </div>
 
@@ -119,12 +123,12 @@
 
 <script>
 import AppIcon from '@/components/icons/AppIcon.vue'
-import { categoryImageUrl } from '@/utils/storageUrl'
+import CategoryImagePreview from './CategoryImagePreview.vue'
 
 /** Модальное окно создания/редактирования категории. */
 export default {
   name: 'CategoryModal',
-  components: { AppIcon },
+  components: { AppIcon, CategoryImagePreview },
   props: {
     modelValue: { type: Boolean, default: false },
     form: { type: Object, required: true },
@@ -134,16 +138,8 @@ export default {
   },
   emits: ['update:modelValue', 'update:form', 'save', 'image-upload'],
   methods: {
-    imageUrl(filename) {
-      return categoryImageUrl(filename)
-    },
-    onFileChange(event) {
-      const file = event.target.files[0]
-      if (file) {
-        const reader = new FileReader()
-        reader.onload = (e) => this.$emit('image-upload', { file, preview: e.target.result })
-        reader.readAsDataURL(file)
-      }
+    onImageUpload({ file, preview }) {
+      this.$emit('image-upload', { file, preview })
     }
   }
 }

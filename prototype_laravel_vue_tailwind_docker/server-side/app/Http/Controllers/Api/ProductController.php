@@ -42,7 +42,8 @@ class ProductController extends Controller
     /** Создание товара. */
     public function store(StoreProductRequest $request): JsonResponse
     {
-        $product = $this->service->create($request->validated());
+        $data = $this->prepareProductData($request);
+        $product = $this->service->create($data);
         $product->load('category');
         return response()->json([
             'success' => true,
@@ -54,12 +55,35 @@ class ProductController extends Controller
     /** Обновление товара. */
     public function update(UpdateProductRequest $request, Product $product): JsonResponse
     {
-        $product = $this->service->update($product, $request->validated());
+        $data = $this->prepareProductData($request, $product);
+        $product = $this->service->update($product, $data);
         return response()->json([
             'success' => true,
             'message' => 'Product updated',
             'data' => new ProductResource($product),
         ]);
+    }
+
+    /** Подготавливает данные: при FormData — сохраняет файлы в storage/products, объединяет с existing_images. */
+    private function prepareProductData(StoreProductRequest|UpdateProductRequest $request, ?Product $product = null): array
+    {
+        $data = $request->validated();
+        if (! $request->hasFile('images') && ! $request->has('existing_images')) {
+            return $data;
+        }
+        $existing = json_decode($request->input('existing_images', '[]'), true);
+        $existing = is_array($existing) ? $existing : [];
+        $newFiles = $request->file('images');
+        $newFiles = is_array($newFiles) ? $newFiles : ($newFiles ? [$newFiles] : []);
+        $newFilenames = [];
+        foreach ($newFiles as $file) {
+            if ($file && $file->isValid()) {
+                $path = $file->store('products', 'public');
+                $newFilenames[] = basename($path);
+            }
+        }
+        $data['images'] = array_merge($existing, $newFilenames);
+        return $data;
     }
 
     /** Удаление товара. */
